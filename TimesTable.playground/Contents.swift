@@ -38,7 +38,7 @@ func printGugu() {
 
 // 배열계산함수 + 프린트함수 동시실행
 func execute() {
-    var num = 2
+    let num = 2
 //    gugu1(number:num)
 //    gugu2(number:num)
     gugu3(number:num)
@@ -47,3 +47,24 @@ func execute() {
 
 // 실행
 execute()
+
+// -------------------------------------
+// Hngfu github 참고하여 추가함
+// --> 배열 요소값을 0이 아닌 1부터 9로 채워서 시작
+var gugudan2 = Array(1...9)
+let num2 = 4
+func gugu4(number : Int) {
+    for i in gugudan2 {
+        gugudan2[i-1] = gugudan2[i-1] * number
+    }
+    method = "방법4"
+}
+func printGugu2() {
+    print(method)
+    for i in gugudan2 {
+        print(i)
+    }
+}
+gugu4(number:num2)
+printGugu2()
+
