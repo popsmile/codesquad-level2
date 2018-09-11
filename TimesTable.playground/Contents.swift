@@ -1,10 +1,8 @@
 //: Playground - noun: a place where people can play
 
-var gugudan = [Int].init(repeating:0, count:9)
-var method = "적용전"
 
 // i를 1씩 증가시키는 for문 활용
-func gugu1(number : Int) {
+func gugu1(number:Int, gugudan: inout [Int], method: inout String) {
     for i in 0..<9 {
         gugudan[i] = number * (i+1)
     }
@@ -13,7 +11,7 @@ func gugu1(number : Int) {
 
 // 배열의 인덱스와 요소값을 모두 가져오는 enumerated 활용
 // --> 요소값을 사용하지 않는 문제점
-func gugu2(number : Int) {
+func gugu2(number:Int, gugudan: inout [Int], method: inout String) {
     for (index, i) in gugudan.enumerated() {
         gugudan[index] = number * (index+1)
     }
@@ -21,15 +19,23 @@ func gugu2(number : Int) {
 }
 
 // 배열의 인덱스를 가져오는 indices 활용
-func gugu3(number : Int) {
+func gugu3(number:Int, gugudan: inout [Int], method: inout String) {
     for i in gugudan.indices {
         gugudan[i] = number * (i+1)
     }
     method = "방법3"
 }
 
+// 배열 요소값을 0이 아닌 1부터 9로 채워서 시작 (Hngfu github 참고하여 추가함)
+func gugu4(number:Int, gugudan: inout [Int], method: inout String) {
+    for i in gugudan {
+        gugudan[i-1] = gugudan[i-1] * number
+    }
+    method = "방법4"
+}
+
 // gugudan 배열과 사용한 방법명을 프린트
-func printGugu() {
+func printGugu(gugudan:[Int], method:String) {
     print(method)
     for i in gugudan {
         print(i)
@@ -38,33 +44,20 @@ func printGugu() {
 
 // 배열계산함수 + 프린트함수 동시실행
 func execute() {
+    var gugudan = [Int].init(repeating:0, count:9)
+    var gugudan2 = Array(1...9)
+    var method = "적용전"
     let num = 2
-//    gugu1(number:num)
-//    gugu2(number:num)
-    gugu3(number:num)
-    printGugu()
+    
+    gugu1(number:num, gugudan:&gugudan, method:&method)
+    gugu2(number:num, gugudan:&gugudan, method:&method)
+    gugu3(number:num, gugudan:&gugudan, method:&method)
+    printGugu(gugudan:gugudan, method:method)
+    
+    gugu4(number:num, gugudan:&gugudan2, method:&method)
+    printGugu(gugudan:gugudan2, method:method)
 }
 
 // 실행
 execute()
-
-// -------------------------------------
-// Hngfu github 참고하여 추가함
-// --> 배열 요소값을 0이 아닌 1부터 9로 채워서 시작
-var gugudan2 = Array(1...9)
-let num2 = 4
-func gugu4(number : Int) {
-    for i in gugudan2 {
-        gugudan2[i-1] = gugudan2[i-1] * number
-    }
-    method = "방법4"
-}
-func printGugu2() {
-    print(method)
-    for i in gugudan2 {
-        print(i)
-    }
-}
-gugu4(number:num2)
-printGugu2()
 
