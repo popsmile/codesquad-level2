@@ -45,15 +45,15 @@ func addUnit(value:String) -> String {
 }
 
 // 실행 부분
-func execute(input:String) {
+func executeConvert(input:String) -> String {
     var str = ""
     if(isCM(value:input)) {
         str = String(convertCMtoM(cm: removeUnit(value: input)))
     } else {
         str = String(convertMtoCM(m: removeUnit(value: input)))
     }
-    print(addUnit(value: str))
+    return addUnit(value: str)
 }
 
-execute(input: "180cm")
-execute(input: "1.2m")
+print(executeConvert(input: "180cm"))
+print(executeConvert(input: "1.2m"))
